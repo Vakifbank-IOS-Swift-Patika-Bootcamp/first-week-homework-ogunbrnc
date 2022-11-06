@@ -1,4 +1,4 @@
-import UIKit
+import Foundation
 //Q-1 Palindrome Check Case Insensitive
 extension String {
     var length: Int {
@@ -16,29 +16,20 @@ extension String {
     }
 }
 
-func isPalindromeCaseInsensitive(str:String) -> Bool {
+func isPalindrome(str:String) -> Bool {
     guard str.count > 1 else { return true }
-    for index in 0 ..< str.count / 2 {
-        if str[index].lowercased() != str[str.count - index - 1].lowercased() {
+    let trimmedString = str.replacingOccurrences(of: " ", with: "")
+    let trimmedStringWithoutPunctuation = trimmedString.components(separatedBy: CharacterSet.punctuationCharacters).joined(separator: "")
+    for index in 0 ..< trimmedStringWithoutPunctuation.count / 2 {
+        if trimmedStringWithoutPunctuation[index].lowercased() != trimmedStringWithoutPunctuation[trimmedStringWithoutPunctuation.count - index - 1].lowercased() {
             return false
         }
     }
     return true
 }
-print(isPalindromeCaseInsensitive(str: "Aba") ? "Palindrome!":"Not Palindrome!")
+print(isPalindrome(str: "Ey Nihat Adana'da tahin yE.") ? "Palindrome!":"Not Palindrome!")
 
-//Q-1 Palindrome Check Case Sensitive
-
-func isPalindromeCaseSensitive(str:String) -> Bool {
-    return str == String(str.reversed())
-}
-print(isPalindromeCaseSensitive(str: "Aba") ? "Palindrome!":"Not Palindrome!")
-
-
-
-
-//Q-2 With Extension
-//Array can contain only one data type in counfOfElements function.
+//Q-2
 extension Array where Element: Hashable {
     func countOfElements() -> [Element:Int] {
         var elementCount = [Element: Int]()
@@ -50,26 +41,12 @@ extension Array where Element: Hashable {
 }
 let intArr = [2,3,4,2,3,2,2,4,5,6]
 let stringArr = ["C","C","Swift","Python","Python","Java"]
+let doubleArr = [1.5,2.5,2.5,3.5,3.5,4.0]
+let boolArr = [true,true,true,false,false,true]
 print(intArr.countOfElements())
 print(stringArr.countOfElements())
-
-//Q2- With Generics
-//Array can contains multiple data type in counfOfElements function.
-func countOfElement<T:Any>(items:[T]) -> [String:Int] {
-    let stringItems = items.map{ String(describing: $0) }
-    var elementCount = [String: Int]()
-    for element in stringItems {
-        elementCount[element] = (elementCount[element] ?? 0) + 1
-    }
-    return elementCount
-}
-
-let randomArr : [Any] = [2,3,4,"C","C++","Python",2,2,3]
-print(countOfElement(items:intArr))
-print(countOfElement(items:stringArr))
-print(countOfElement(items:randomArr))
-
-
+print(doubleArr.countOfElements())
+print(boolArr.countOfElements())
 
 
 //Q-3
@@ -92,23 +69,23 @@ func createPyramidSecond(n: Int) {
 createPyramidSecond(n: 5)
 
 //Q-5
-func sumOfMultiples(n: Int) -> Int {
+func sumOfMultiples() -> Int {
     var sum = 0
-    for i in 1..<n {
+    for i in 1..<1000 {
         if i % 3 == 0 || i % 5 == 0 {
             sum += i
         }
     }
     return sum
 }
-print(sumOfMultiples(n: 1000))
+print(sumOfMultiples())
 
 //Q-6
-func sumOfEvenFibonacciSeries(n: Int) -> Int {
+func sumOfEvenFibonacciSeries() -> Int {
     var prev = 0
     var cur = 1
     var sum = 0
-    while cur <= n {
+    while cur <= 4000000 {
         let temp = prev
         prev = cur
         cur = temp + cur
@@ -118,11 +95,11 @@ func sumOfEvenFibonacciSeries(n: Int) -> Int {
     }
     return sum
 }
-print(sumOfEvenFibonacciSeries(n: 4000000))
+print(sumOfEvenFibonacciSeries())
 
 //Q-7
-func findLargestPrimeFactor(n: Int) -> Int {
-    var temp = n
+func findLargestPrimeFactor() -> Int {
+    var temp = 600851475143
     var i = 2
     var divisors = [Int]()
     while i<=temp {
@@ -134,4 +111,4 @@ func findLargestPrimeFactor(n: Int) -> Int {
     }
     return divisors.sorted().last!
 }
-print(findLargestPrimeFactor(n: 600851475143))
+print(findLargestPrimeFactor())
