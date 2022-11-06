@@ -28,12 +28,17 @@ func isPalindromeCaseInsensitive(str:String) -> Bool {
 print(isPalindromeCaseInsensitive(str: "Aba") ? "Palindrome!":"Not Palindrome!")
 
 //Q-1 Palindrome Check Case Sensitive
+
 func isPalindromeCaseSensitive(str:String) -> Bool {
     return str == String(str.reversed())
 }
 print(isPalindromeCaseSensitive(str: "Aba") ? "Palindrome!":"Not Palindrome!")
 
-//Q-2
+
+
+
+//Q-2 With Extension
+//Array can contain only one data type in counfOfElements function.
 extension Array where Element: Hashable {
     func countOfElements() -> [Element:Int] {
         var elementCount = [Element: Int]()
@@ -47,6 +52,25 @@ let intArr = [2,3,4,2,3,2,2,4,5,6]
 let stringArr = ["C","C","Swift","Python","Python","Java"]
 print(intArr.countOfElements())
 print(stringArr.countOfElements())
+
+//Q2- With Generics
+//Array can contains multiple data type in counfOfElements function.
+func countOfElement<T:Any>(items:[T]) -> [String:Int] {
+    let stringItems = items.map{ String(describing: $0) }
+    var elementCount = [String: Int]()
+    for element in stringItems {
+        elementCount[element] = (elementCount[element] ?? 0) + 1
+    }
+    return elementCount
+}
+
+let randomArr : [Any] = [2,3,4,"C","C++","Python",2,2,3]
+print(countOfElement(items:intArr))
+print(countOfElement(items:stringArr))
+print(countOfElement(items:randomArr))
+
+
+
 
 //Q-3
 func createPyramid(n: Int) {
