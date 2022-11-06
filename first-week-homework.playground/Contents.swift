@@ -1,5 +1,5 @@
 import UIKit
-//Q-1
+//Q-1 Palindrome Check Case Insensitive
 extension String {
     var length: Int {
         return count
@@ -16,22 +16,22 @@ extension String {
     }
 }
 
-func isPalindromeCheck(str:String) -> Bool {
+func isPalindromeCaseInsensitive(str:String) -> Bool {
     guard str.count > 1 else { return true }
     for index in 0 ..< str.count / 2 {
-        if str[index] != str[str.count - index - 1] {
+        if str[index].lowercased() != str[str.count - index - 1].lowercased() {
             return false
         }
     }
     return true
 }
-print(isPalindromeCheck(str: "aba") ? "Palindrome!":"Not Palindrome!")
+print(isPalindromeCaseInsensitive(str: "Aba") ? "Palindrome!":"Not Palindrome!")
 
-//Q-1 Alternative Solution
-func isPalindrome(str:String) -> Bool {
+//Q-1 Palindrome Check Case Sensitive
+func isPalindromeCaseSensitive(str:String) -> Bool {
     return str == String(str.reversed())
 }
-print(isPalindrome(str: "aba") ? "Palindrome!":"Not Palindrome!")
+print(isPalindromeCaseSensitive(str: "Aba") ? "Palindrome!":"Not Palindrome!")
 
 //Q-2
 extension Array where Element: Hashable {
